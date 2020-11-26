@@ -1,5 +1,5 @@
 # Chinook - Marketing
-## Aufgabenstellung
+## Aufgabenstellung:
 Chinook ist ein Media-Store mit dem Ziel, seinen Kunden den bestmöglichen Service zu bieten. Um
 die Dienste an den Kunden entsprechend anzupassen, benötigt die Marketing Abteilung
 Informationen. Das bestehende System beinhaltet die Stammdaten und Bewegungsdaten aus der
@@ -7,7 +7,7 @@ Vergangenheit. Betrachten wir folgendes Datenmodell:
 
 ![Models](Models.png)
 
-## Anforderungen
+## Anforderungen:
 *  **Track-Zeit-Auswertung**
 * Track mit Maximalzeit [sec]
 * Track mit Minimalzeit [sec]
@@ -29,6 +29,6 @@ Vergangenheit. Betrachten wir folgendes Datenmodell:
 * Genre mit der höchsten Verkaufszahl
 * Genre mit der minimalen Verkaufszahl
 
-## Ausgabe
+## Ausgabe:
 Die Ausgabe sollte dann so aussehen:
 ![Output](Output.png)
