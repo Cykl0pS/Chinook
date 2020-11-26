@@ -45,7 +45,7 @@ namespace Chinook.ConApp
 			Console.WriteLine("{0,-65} {1,25}", sales.HighestSales.Name, sales.HighestSales.Secondary);
 			Console.WriteLine("{0,-65} {1,25}", sales.LowestSales.Name, sales.LowestSales.Secondary);
 			Console.WriteLine("{0,-65} {1,25}", sales.HighestRevenue.Name, sales.HighestRevenue.Secondary);
-			Console.WriteLine("{0,-65} {1,25}", sales.LowestRevenue.Name, sales.LowestRevenue.Secondary);
+			Console.WriteLine("{0,-65} {1,25}\n", sales.LowestRevenue.Name, sales.LowestRevenue.Secondary);
 
 			var customers = Report.MarketingReports.GetCustomersInfo();
 
