@@ -4,12 +4,12 @@
 	{
 		double Average { get; }
 
-		IItemSecondary<int> HighestSales { get; }
+		IMultipleInfo<int> HighestSales { get; }
 
-		IItemSecondary<int> LowestSales { get; }
+		IMultipleInfo<int> LowestSales { get; }
 
-		IItemSecondary<decimal> HighestRevenue { get; }
+		IMultipleInfo<decimal> HighestRevenue { get; }
 
-		IItemSecondary<decimal> LowestRevenue { get; }
+		IMultipleInfo<decimal> LowestRevenue { get; }
 	}
 }

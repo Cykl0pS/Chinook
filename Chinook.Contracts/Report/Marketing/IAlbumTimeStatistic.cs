@@ -4,8 +4,8 @@
     {
         double Avg { get; }
 
-        IAlbumTime Longest { get; }
+        IAlbumTime Max { get; }
 
-        IAlbumTime Shortest { get; }
+        IAlbumTime Min { get; }
     }
 }

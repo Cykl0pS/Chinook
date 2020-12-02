@@ -4,8 +4,8 @@
     {
         double Avg { get; set; }
 
-        ITrackTime Longest { get; set; }
+        ITrackTime Max { get; set; }
 
-        ITrackTime Shortest { get; set; }
+        ITrackTime Min { get; set; }
     }
 }

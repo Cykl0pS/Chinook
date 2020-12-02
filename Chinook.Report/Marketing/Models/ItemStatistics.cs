@@ -4,8 +4,8 @@ namespace Chinook.Report.Marketing.Models
 {
     internal class ItemStatistic : IItemStatistic
     {
-        public IItemSecondary<int> A { get; set; }
+        public IMultipleInfo<int> firstItem { get; set; }
 
-        public IItemSecondary<int> B { get; set; }
+        public IMultipleInfo<int> secondItem { get; set; }
     }
 }

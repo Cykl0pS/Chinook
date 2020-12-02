@@ -6,12 +6,12 @@ namespace Chinook.Report.Marketing.Models
     {
         public double Average { get; set; }
 
-        public IItemSecondary<int> HighestSales { get; set; }
+        public IMultipleInfo<int> HighestSales { get; set; }
 
-        public IItemSecondary<int> LowestSales { get; set; }
+        public IMultipleInfo<int> LowestSales { get; set; }
 
-        public IItemSecondary<decimal> HighestRevenue { get; set; }
+        public IMultipleInfo<decimal> HighestRevenue { get; set; }
 
-        public IItemSecondary<decimal> LowestRevenue { get; set; }
+        public IMultipleInfo<decimal> LowestRevenue { get; set; }
     }
 }

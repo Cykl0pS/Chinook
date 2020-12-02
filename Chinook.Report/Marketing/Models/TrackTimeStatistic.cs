@@ -4,8 +4,8 @@
     {
         public double Avg { get; set; }
 
-        public Chinook.Contracts.Report.Marketing.ITrackTime Longest { get; set; }
+        public Chinook.Contracts.Report.Marketing.ITrackTime Max { get; set; }
 
-        public Chinook.Contracts.Report.Marketing.ITrackTime Shortest { get; set; }
+        public Chinook.Contracts.Report.Marketing.ITrackTime Min { get; set; }
     }
 }

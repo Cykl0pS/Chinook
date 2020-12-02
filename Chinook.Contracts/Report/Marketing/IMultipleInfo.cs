@@ -1,9 +1,9 @@
 ﻿namespace Chinook.Contracts.Report.Marketing
 {
-	public interface IItemSecondary<T>
+	public interface IMultipleInfo<T>
 	{
 		string Name { get; }
 
-		T Secondary { get; }
+		T SecondInfo { get; }
 	}
 }

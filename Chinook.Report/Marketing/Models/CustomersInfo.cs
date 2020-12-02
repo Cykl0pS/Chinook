@@ -6,8 +6,8 @@ namespace Chinook.Report.Marketing.Models
     {
         public double Average { get; set; }
 
-        public IItemSecondary<decimal> TopCustomer { get; set; }
+        public IMultipleInfo<decimal> TopCustomer { get; set; }
 
-        public IItemSecondary<decimal> BottomCustomer { get; set; }
+        public IMultipleInfo<decimal> BottomCustomer { get; set; }
     }
 }

@@ -36,8 +36,8 @@ namespace Chinook.Report
 			return new TrackTimeStatistic()
 			{
 				Avg = avg,
-				Longest = new TrackTime() { Name = longest.Name, Seconds = longest.Miliseconds / 1000 },
-				Shortest = new TrackTime() { Name = shortest.Name, Seconds = shortest.Miliseconds / 1000 }
+				Max = new TrackTime() { Name = longest.Name, Seconds = longest.Miliseconds / 1000 },
+				Min = new TrackTime() { Name = shortest.Name, Seconds = shortest.Miliseconds / 1000 }
 			};
 		}
 
@@ -60,8 +60,8 @@ namespace Chinook.Report
 			return new AlbumTimeStatistic()
 			{
 				Avg = avg,
-				Longest = new AlbumTime() { Name = top.Title, Seconds = t.TotalTime },
-				Shortest = new AlbumTime() { Name = last.Title, Seconds = l.TotalTime }
+				Max = new AlbumTime() { Name = top.Title, Seconds = t.TotalTime },
+				Min = new AlbumTime() { Name = last.Title, Seconds = l.TotalTime }
 			};
 		}
 
@@ -93,10 +93,10 @@ namespace Chinook.Report
 			return new TrackSales()
 			{
 				Average = avg,
-				HighestSales = new ItemSecondary<int>() { Name = track.Name, Secondary = firstTrack.Quantity },
-				LowestSales = new ItemSecondary<int>() { Name = track2.Name, Secondary = lastTrack.Quantity },
-				HighestRevenue = new ItemSecondary<decimal>() { Name = trackPrice.Name, Secondary = firstTrackPrince.Price },
-				LowestRevenue = new ItemSecondary<decimal>() { Name = trackPrice2.Name, Secondary = lastTrackPrince.Price }
+				HighestSales = new MultipleInfo<int>() { Name = track.Name, SecondInfo = firstTrack.Quantity },
+				LowestSales = new MultipleInfo<int>() { Name = track2.Name, SecondInfo = lastTrack.Quantity },
+				HighestRevenue = new MultipleInfo<decimal>() { Name = trackPrice.Name, SecondInfo = firstTrackPrince.Price },
+				LowestRevenue = new MultipleInfo<decimal>() { Name = trackPrice2.Name, SecondInfo = lastTrackPrince.Price }
 			};
 		}
 
@@ -126,8 +126,8 @@ namespace Chinook.Report
 			return new CustomersInfo()
 			{
 				Average = avg,
-				TopCustomer = new ItemSecondary<decimal>() { Name = topCust.FirstName + " " + topCust.LastName, Secondary = topCustF.Price },
-				BottomCustomer = new ItemSecondary<decimal>() { Name = bottomCust.FirstName + " " + bottomCust.LastName, Secondary = bottomCustF.Price}
+				TopCustomer = new MultipleInfo<decimal>() { Name = topCust.FirstName + " " + topCust.LastName, SecondInfo = topCustF.Price },
+				BottomCustomer = new MultipleInfo<decimal>() { Name = bottomCust.FirstName + " " + bottomCust.LastName, SecondInfo = bottomCustF.Price}
 			};
 		}
 
@@ -152,8 +152,8 @@ namespace Chinook.Report
 
 			return new ItemStatistic()
 			{
-				A = new ItemSecondary<int>() { Name = topGenre.Name, Secondary = topGenreF.Quantity },
-				B = new ItemSecondary<int>() { Name = bottomGenre.Name, Secondary = bottomGenreL.Quantity }
+				firstItem = new MultipleInfo<int>() { Name = topGenre.Name, SecondInfo = topGenreF.Quantity },
+				secondItem = new MultipleInfo<int>() { Name = bottomGenre.Name, SecondInfo = bottomGenreL.Quantity }
 			};
 		}
 	}

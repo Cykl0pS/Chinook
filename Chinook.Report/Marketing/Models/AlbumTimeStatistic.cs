@@ -6,8 +6,8 @@ namespace Chinook.Report.Marketing.Models
     {
         public double Avg { get; set; }
 
-        public IAlbumTime Longest { get; set; }
+        public IAlbumTime Max { get; set; }
 
-        public IAlbumTime Shortest { get; set; }
+        public IAlbumTime Min { get; set; }
     }
 }

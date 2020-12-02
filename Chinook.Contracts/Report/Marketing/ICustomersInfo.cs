@@ -4,8 +4,8 @@
 	{
 		double Average { get; }
 
-		IItemSecondary<decimal> TopCustomer { get; }
+		IMultipleInfo<decimal> TopCustomer { get; }
 
-		IItemSecondary<decimal> BottomCustomer { get; }
+		IMultipleInfo<decimal> BottomCustomer { get; }
 	}
 }

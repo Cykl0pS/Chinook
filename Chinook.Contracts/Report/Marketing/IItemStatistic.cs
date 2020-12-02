@@ -2,7 +2,7 @@
 {
     public interface IItemStatistic
     {
-        IItemSecondary<int> A { get; }
-        IItemSecondary<int> B { get; }
+        IMultipleInfo<int> firstItem { get; }
+        IMultipleInfo<int> secondItem { get; }
     }
 }
