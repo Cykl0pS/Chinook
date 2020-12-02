@@ -8,6 +8,7 @@ namespace Chinook.Report
 {
 	public class MarketingReports
 	{
+		private static IEnumerable<IArtist> artists = Logic.Factory.GetAllArtists();
 		private static IEnumerable<ITrack> tracks = Logic.Factory.GetAllTracks();
 		private static IEnumerable<IAlbum> albums = Logic.Factory.GetAllAlbums();
 		private static IEnumerable<IInvoiceLine> invoiceLines = Logic.Factory.GetAllInvoiceLines();
@@ -17,24 +18,31 @@ namespace Chinook.Report
 
 		public static IEnumerable<IArtistStatistic> GetArtistStatistics()
 		{
-			var artists = Logic.Factory.GetAllArtists();
-
-			var result = default(IEnumerable<IArtistStatistic>);
-
-			return result;
+			return (from at in artists
+					group at by at.Id into atGroup
+					select new ArtistStatistic
+					{
+						Name = artists.Where(e => e.Id == atGroup.Key).First().Name,
+						AlbumCount = albums.Where(e => e.ArtistId == atGroup.Key).Count()
+					});
 		}
 
-		public static (double avg, ITrackTime max, ITrackTime min) GetTrackTimes()
-        {
-			ITrack max = tracks.Aggregate((a, b) => a.Miliseconds > b.Miliseconds ? a : b);
-			ITrack min = tracks.Aggregate((a, b) => a.Miliseconds < b.Miliseconds ? a : b);
+		public static ITrackTimeStatistic GetTrackTimes()
+		{
+			ITrack longest = tracks.Aggregate((a, b) => a.Miliseconds > b.Miliseconds ? a : b);
 			double avg = tracks.Average(c => c.Miliseconds);
+			ITrack shortest = tracks.Aggregate((a, b) => a.Miliseconds < b.Miliseconds ? a : b);
 
-			return (avg, new TrackTime() { Name = max.Name, Seconds = max.Miliseconds / 1000 }, new TrackTime() { Name = min.Name, Seconds = min.Miliseconds / 1000 });
-        }
+			return new TrackTimeStatistic()
+			{
+				Avg = avg,
+				Longest = new TrackTime() { Name = longest.Name, Seconds = longest.Miliseconds / 1000 },
+				Shortest = new TrackTime() { Name = shortest.Name, Seconds = shortest.Miliseconds / 1000 }
+			};
+		}
 
-		public static (double avg, IAlbumTime max, IAlbumTime min) GetAlbumTime()
-        {
+		public static IAlbumTimeStatistic GetAlbumTime()
+		{
 			var new_tracks = (from pl in tracks
 							  group pl by pl.AlbumId into trackGroup
 							  select new
@@ -43,21 +51,19 @@ namespace Chinook.Report
 								  TotalTime = trackGroup.Sum(x => x.Miliseconds) / 1000
 							  }).OrderByDescending(c => c.TotalTime);
 
-			var first = new_tracks.First();
-			var last = new_tracks.Last();
+			var t = new_tracks.First();
+			var l = new_tracks.Last();
+			IAlbum top = albums.ToList().Find(a => a.Id == t.AlbumId);
+			IAlbum last = albums.ToList().Find(a => a.Id == l.AlbumId);
 			double avg = new_tracks.Average(c => c.TotalTime);
 
-			IAlbum top = albums.ToList().Find(a => a.Id == first.AlbumId);
-			IAlbum bottom = albums.ToList().Find(a => a.Id == last.AlbumId);
-
-			return (avg, new AlbumTime() 
-			{ 
-				Name = top.Title, Seconds = first.TotalTime 
-			}, new AlbumTime() 
-			{ 
-				Name = bottom.Title, Seconds = last.TotalTime
-			});
-        }
+			return new AlbumTimeStatistic()
+			{
+				Avg = avg,
+				Longest = new AlbumTime() { Name = top.Title, Seconds = t.TotalTime },
+				Shortest = new AlbumTime() { Name = last.Title, Seconds = l.TotalTime }
+			};
+		}
 
 		public static ITrackSales GetTrackSales()
         {
@@ -124,9 +130,9 @@ namespace Chinook.Report
 				BottomCustomer = new ItemSecondary<decimal>() { Name = bottomCust.FirstName + " " + bottomCust.LastName, Secondary = bottomCustF.Price}
 			};
 		}
-	
-		public static (IItemSecondary<int> a, IItemSecondary<int> b) GetGenresInfo()
-        {
+
+		public static IItemStatistic GetGenresInfo()
+		{
 			var y = (from il in invoiceLines
 					 join tr in tracks
 						 on il.TrackId equals tr.Id
@@ -141,12 +147,14 @@ namespace Chinook.Report
 
 			var topGenreF = y.First();
 			var bottomGenreL = y.Last();
-
 			var topGenre = genres.ToList().Find(c => c.Id == topGenreF.GenreId);
 			var bottomGenre = genres.ToList().Find(c => c.Id == bottomGenreL.GenreId);
 
-			return (new ItemSecondary<int>() { Name = topGenre.Name, Secondary = topGenreF.Quantity },
-				new ItemSecondary<int>() { Name = bottomGenre.Name, Secondary = bottomGenreL.Quantity });
+			return new ItemStatistic()
+			{
+				A = new ItemSecondary<int>() { Name = topGenre.Name, Secondary = topGenreF.Quantity },
+				B = new ItemSecondary<int>() { Name = bottomGenre.Name, Secondary = bottomGenreL.Quantity }
+			};
 		}
 	}
 }
